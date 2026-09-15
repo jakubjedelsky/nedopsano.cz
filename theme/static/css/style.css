@@ -43,24 +43,22 @@ body {
 
 .wordmark:hover { color: var(--accent); }
 
-/* Leading padding puts the first poem a little above centre, which leaves
-   room for the next one to show. Trailing padding lets the last poem
-   scroll up to the middle. */
-main { padding: 22vh 1.25rem 40vh; }
+main { padding: 0 1.25rem; }
 
 .poem {
   max-width: 34rem;
-  /* Poems size to their content and sit a fixed distance apart, so the gap
-     between two poems' text is always the same. Fixed-height sections did
-     not work: a short poem centred in an 80vh box left blank padding at
-     both ends, and the only thing visible of the next poem was that blank
-     space. */
-  margin: 0 auto 30vh;
+  /* A poem owns the whole screen and the next one stays off it: sections
+     tile at 100vh, so centred text is always at least (100vh - its own
+     height) away from its neighbour's. The arrow is the only cue that
+     there is more. */
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 5vh 0;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
-
-.poem:last-child { margin-bottom: 0; }
 
 .poem h2 {
   display: flex;
@@ -122,7 +120,7 @@ main { padding: 22vh 1.25rem 40vh; }
   .hint {
     animation: bob 1.8s ease-in-out infinite, hint-out linear both;
     animation-timeline: auto, scroll(root block);
-    animation-range: normal, 0 18vh;
+    animation-range: normal, normal;
   }
 
   @keyframes bob {
@@ -130,7 +128,11 @@ main { padding: 22vh 1.25rem 40vh; }
     50%      { translate: -50% 0.35rem; }
   }
 
-  @keyframes hint-out { to { opacity: 0; } }
+  /* Visible the whole way down, gone once there is nothing left to scroll. */
+  @keyframes hint-out {
+    0%, 88% { opacity: 1; }
+    100%    { opacity: 0; }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
