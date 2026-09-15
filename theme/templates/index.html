@@ -24,5 +24,9 @@
     </article>
     {% endfor %}
   </main>
+
+  {% if articles|length > 1 %}
+  <div class="hint" aria-hidden="true">&darr;</div>
+  {% endif %}
 </body>
 </html>

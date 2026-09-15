@@ -43,20 +43,24 @@ body {
 
 .wordmark:hover { color: var(--accent); }
 
-main { padding: 0 1.25rem; }
+/* Leading padding puts the first poem a little above centre, which leaves
+   room for the next one to show. Trailing padding lets the last poem
+   scroll up to the middle. */
+main { padding: 22vh 1.25rem 40vh; }
 
 .poem {
   max-width: 34rem;
-  /* Shorter than the viewport on purpose: ~20vh of the previous and next
-     poem stays on screen, blurred, so it is obvious where to scroll. */
-  min-height: 80vh;
-  min-height: 80dvh;
-  padding: 5vh 0;
-  margin: 0 auto;
+  /* Poems size to their content and sit a fixed distance apart, so the gap
+     between two poems' text is always the same. Fixed-height sections did
+     not work: a short poem centred in an 80vh box left blank padding at
+     both ends, and the only thing visible of the next poem was that blank
+     space. */
+  margin: 0 auto 30vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
+
+.poem:last-child { margin-bottom: 0; }
 
 .poem h2 {
   display: flex;
@@ -83,9 +87,21 @@ main { padding: 0 1.25rem; }
 
 .poem p:last-child { margin-bottom: 0; }
 
-/* The whole scroll effect. The guard is load-bearing: without
-   animation-timeline this runs as a 0s animation and `both` would leave
-   every poem stuck on the blurred keyframe. */
+.hint {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  translate: -50%;
+  z-index: 1;
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* The whole scroll effect. Both @supports guards are load-bearing: without
+   scroll-driven timelines these run as 0s animations and `both` would leave
+   every poem stuck on the blurred keyframe and the hint stuck invisible. */
 @supports (animation-timeline: view()) {
   .poem {
     animation: focus linear both;
@@ -93,14 +109,32 @@ main { padding: 0 1.25rem; }
   }
 
   /* view() runs from entering the bottom of the viewport to leaving the
-     top, so 50% is dead centre — the sharp point. */
+     top, so 50% is dead centre — the sharp point, whatever the poem's
+     height. The plateau is wide because nothing snaps: the reader stops
+     anywhere and should still land on a readable poem. */
   @keyframes focus {
-    0%, 100% { filter: blur(6px); opacity: 0.4; }  /* ponytail: flat 6px, no per-breakpoint tuning */
+    0%, 100% { filter: blur(5px); opacity: 0.35; }  /* ponytail: flat 5px, no per-breakpoint tuning */
     35%, 65% { filter: blur(0); opacity: 1; }
   }
+}
+
+@supports (animation-timeline: scroll()) {
+  .hint {
+    animation: bob 1.8s ease-in-out infinite, hint-out linear both;
+    animation-timeline: auto, scroll(root block);
+    animation-range: normal, 0 18vh;
+  }
+
+  @keyframes bob {
+    0%, 100% { translate: -50% 0; }
+    50%      { translate: -50% 0.35rem; }
+  }
+
+  @keyframes hint-out { to { opacity: 0; } }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .poem { animation: none; }
+  .hint { animation: none; }
 }
