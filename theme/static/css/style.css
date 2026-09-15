@@ -87,7 +87,6 @@ main { padding: 0 1.25rem; }
 
 .hint {
   position: fixed;
-  bottom: 1.5rem;
   left: 50%;
   translate: -50%;
   z-index: 1;
@@ -96,6 +95,12 @@ main { padding: 0 1.25rem; }
   line-height: 1;
   pointer-events: none;
 }
+
+.hint-down { bottom: 1.5rem; }
+
+/* Hidden by default so browsers without scroll timelines never offer to
+   scroll up from the top; the animation below is what reveals it. */
+.hint-up { top: 1.5rem; opacity: 0; }
 
 /* The whole scroll effect. Both @supports guards are load-bearing: without
    scroll-driven timelines these run as 0s animations and `both` would leave
@@ -117,26 +122,52 @@ main { padding: 0 1.25rem; }
 }
 
 @supports (animation-timeline: scroll()) {
-  .hint {
-    animation: bob 1.8s ease-in-out infinite, hint-out linear both;
+  /* Each arrow bobs on its own clock and fades on the document's scroll.
+     The ranges are fixed lengths, not percentages, so they behave the same
+     with three poems as with thirty. */
+  .hint-down {
+    animation: bob-down 1.8s ease-in-out infinite, fade-out linear both;
     animation-timeline: auto, scroll(root block);
-    animation-range: normal, normal;
+    animation-range: normal, calc(100% - 15vh) 100%;
   }
 
-  @keyframes bob {
+  .hint-up {
+    animation: bob-up 1.8s ease-in-out infinite, fade-in linear both;
+    animation-timeline: auto, scroll(root block);
+    animation-range: normal, 0 15vh;
+  }
+
+  @keyframes bob-down {
     0%, 100% { translate: -50% 0; }
     50%      { translate: -50% 0.35rem; }
   }
 
-  /* Visible the whole way down, gone once there is nothing left to scroll. */
-  @keyframes hint-out {
-    0%, 88% { opacity: 1; }
-    100%    { opacity: 0; }
+  @keyframes bob-up {
+    0%, 100% { translate: -50% 0; }
+    50%      { translate: -50% -0.35rem; }
+  }
+
+  @keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
+  @keyframes fade-in  { from { opacity: 0; } to { opacity: 1; } }
+
+  /* Keep the scroll-linked fades — they are opacity, not motion — and drop
+     only the bobbing. */
+  @media (prefers-reduced-motion: reduce) {
+    .hint-down {
+      animation: fade-out linear both;
+      animation-timeline: scroll(root block);
+      animation-range: calc(100% - 15vh) 100%;
+    }
+
+    .hint-up {
+      animation: fade-in linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 15vh;
+    }
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .poem { animation: none; }
-  .hint { animation: none; }
 }
