@@ -1,0 +1,10 @@
+output
+*.py[co]
+.*.swp
+.*.swo
+
+cache/
+
+.idea
+.venv
+.DS_Store
