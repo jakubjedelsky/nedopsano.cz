@@ -11,16 +11,14 @@
   {% endif %}
 </head>
 <body>
-  <a class="wordmark" href="https://stderr.cz">{{ SITENAME }}</a>
+  <a class="wordmark" href="{{ SITEURL }}/">{{ SITENAME }}</a>
 
   <main>
     {% for article in articles %}
     <article class="poem" id="{{ article.slug }}">
-      <h2>
-        {{ article.title }}
-        <time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time>
-      </h2>
+      <h2>{{ article.title }}</h2>
       {{ article.content }}
+      <footer>(<time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time>)</footer>
     </article>
     {% endfor %}
   </main>
