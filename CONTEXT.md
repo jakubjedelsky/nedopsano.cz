@@ -116,9 +116,9 @@ Push to `main` → `.github/workflows/publish.yml` builds with
 `peaceiris/actions-gh-pages@v4`, same shape as the blog's workflow but
 without its cleanup step. `content/extra/CNAME` lands at the output root.
 
-Repo: `github.com/jakubjedelsky/nedopsano.cz`, created 2026-09-23 as
-private. The free GitHub plan does not serve Pages from a private repo, so
-Pages needs either a public repo or GitHub Pro. DNS is at Wedos: four `A`
+Repo: `github.com/jakubjedelsky/nedopsano.cz`, public (the free plan
+does not serve Pages from a private repo). Pages serves `gh-pages` with
+the custom domain `nedopsano.cz`. DNS is at Wedos: four `A`
 records on the apex to GitHub Pages IPs, `www` CNAME to
 `jakubjedelsky.github.io`. Enforce HTTPS after GitHub issues the
 certificate. Commits in this repo use `jakub.jedelsky@gmail.com`.
