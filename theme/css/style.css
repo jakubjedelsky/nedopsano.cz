@@ -67,6 +67,24 @@ main { padding: 0 1.25rem; }
   line-height: 1.25;
 }
 
+/* Shown on hover; touch screens have no hover, so there it stays faintly
+   visible. No JS, so a click only sets the URL for the reader to copy. */
+.permalink {
+  color: var(--muted);
+  font-weight: 300;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.poem h2:hover .permalink,
+.permalink:focus-visible { opacity: 1; }
+
+.permalink:hover { color: var(--accent); }
+
+@media (hover: none) {
+  .permalink { opacity: 0.5; }
+}
 
 .poem p {
   margin: 0 0 1.6rem;
