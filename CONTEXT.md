@@ -116,14 +116,12 @@ Push to `main` → `.github/workflows/publish.yml` builds with
 `peaceiris/actions-gh-pages@v4`, same shape as the blog's workflow but
 without its cleanup step. `content/extra/CNAME` lands at the output root.
 
-**Not done yet as of 2026-09-17:** the repo is local only, with no GitHub
-remote, so nothing has been deployed. Remaining steps:
-
-1. `gh repo create jakubjedelsky/basne.stderr.cz --public --source . --push`
-2. Enable GitHub Pages on the `gh-pages` branch after the first run.
-3. Add a `basne` CNAME → `jakubjedelsky.github.io` in the Cloudflare DNS
-   zone for `stderr.cz`, set to **DNS-only** (grey cloud) so GitHub can
-   issue the certificate. `basne.stderr.cz` does not resolve today.
+Repo: `github.com/jakubjedelsky/nedopsano.cz`, created 2026-09-23 as
+private. The free GitHub plan does not serve Pages from a private repo, so
+Pages needs either a public repo or GitHub Pro. DNS is at Wedos: four `A`
+records on the apex to GitHub Pages IPs, `www` CNAME to
+`jakubjedelsky.github.io`. Enforce HTTPS after GitHub issues the
+certificate. Commits in this repo use `jakub.jedelsky@gmail.com`.
 
 ## Local dev
 
