@@ -1,7 +1,6 @@
-AUTHOR = u'Jakub Jedelský'
-SITENAME = u'básně'
+AUTHOR = u'- jj'
+SITENAME = u'nedopsáno'
 SITEURL = 'http://localhost:8000'
-SITESUBTITLE = u'stderr.cz'
 
 TIMEZONE = 'Europe/Prague'
 LOCALE = 'cs_CZ.UTF-8'

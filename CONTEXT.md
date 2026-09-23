@@ -1,11 +1,11 @@
-# CONTEXT: basne.stderr.cz
+# CONTEXT: nedopsano.cz
 
 Created 2026-09-15, built out 2026-09-15 to 2026-09-17. This file is for
 future agent sessions and for the site owner. Update it as things change.
 
 ## What this repo is
 
-A site for Jakub's own poems, at `basne.stderr.cz`. Built with
+A site for Jakub's own poems, at `nedopsano.cz` (moved from `basne.stderr.cz` on 2026-09-23). Built with
 [Pelican](https://getpelican.com), the same generator as the blog at
 `stderr.cz`, and deliberately kept in that family: the colours are copied
 from the blog's theme and the local tooling is the same.
@@ -16,10 +16,10 @@ the only sharp thing. There is no JavaScript anywhere.
 
 ```
 pelicanconf.py              local config, SITEURL = localhost
-publishconf.py              production override, SITEURL = https://basne.stderr.cz
+publishconf.py              production override, SITEURL = https://nedopsano.cz
 build.sh                    html | clean | regenerate | serve  (copied from stderr.cz)
 content/*.md                one poem per file, Pelican colon metadata
-content/extra/CNAME         basne.stderr.cz, copied to the output root
+content/extra/CNAME         nedopsano.cz, copied to the output root
 theme/templates/index.html  the only template
 theme/static/css/style.css  the only stylesheet
 .github/workflows/publish.yml   push to main → build → deploy to gh-pages
@@ -39,7 +39,7 @@ druhá strofa
 ```
 
 One newline is a line break, a blank line starts a new stanza. Poems are
-ordered newest first and each one is reachable at `basne.stderr.cz/#slug`.
+ordered newest first and each one is reachable at `nedopsano.cz/#slug`.
 
 ## Decisions and the reasons behind them
 

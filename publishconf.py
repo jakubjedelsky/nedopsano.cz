@@ -1,4 +1,4 @@
 from pelicanconf import *  # noqa: F401,F403
 
-SITEURL = "https://basne.stderr.cz"
+SITEURL = "https://nedopsano.cz"
 RELATIVE_URLS = False

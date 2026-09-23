@@ -1,4 +1,4 @@
-# basne.stderr.cz
+# nedopsano.cz
 
 Básně. Jedna báseň na obrazovku, další čeká pod ní rozostřená.
 
@@ -18,7 +18,7 @@ druhá strofa
 ```
 
 Jeden konec řádku = zlom řádku (`nl2br`), prázdný řádek = nová strofa.
-Básně se řadí od nejnovější. Každá má vlastní odkaz `basne.stderr.cz/#slug`.
+Básně se řadí od nejnovější. Každá má vlastní odkaz `nedopsano.cz/#slug`.
 
 ## Build
 
