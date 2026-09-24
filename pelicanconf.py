@@ -41,7 +41,9 @@ MARKDOWN = {
     'output_format': 'html5',
 }
 
-STATIC_PATHS = ['extra/CNAME']
+STATIC_PATHS = ['extra/CNAME', 'extra/favicon.ico', 'extra/favicon.svg']
 EXTRA_PATH_METADATA = {
     'extra/CNAME': {'path': 'CNAME'},
+    'extra/favicon.ico': {'path': 'favicon.ico'},
+    'extra/favicon.svg': {'path': 'favicon.svg'},
 }
