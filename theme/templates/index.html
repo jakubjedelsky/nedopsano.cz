@@ -6,7 +6,7 @@
   <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
   <link rel="icon" type="image/svg+xml" href="{{ SITEURL }}/favicon.svg">
   <link rel="alternate icon" href="{{ SITEURL }}/favicon.ico">
-  <link rel="stylesheet" href="{{ SITEURL }}/theme/css/style.css">
+  <link rel="stylesheet" href="{{ SITEURL }}/theme/css/style.css?v={{ CSS_VERSION }}">
   {% if FEED_ALL_ATOM %}
   <link rel="alternate" type="application/atom+xml" title="{{ SITENAME }}"
         href="{{ FEED_DOMAIN }}/{{ FEED_ALL_ATOM }}">

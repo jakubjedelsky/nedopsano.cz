@@ -1,3 +1,6 @@
+import hashlib
+import os
+
 AUTHOR = u'- jj'
 SITENAME = u'nedopsáno'
 SITEURL = 'http://localhost:8000'
@@ -48,3 +51,9 @@ EXTRA_PATH_METADATA = {
     'extra/favicon.ico': {'path': 'favicon.ico'},
     'extra/favicon.svg': {'path': 'favicon.svg'},
 }
+
+# Cloudflare caches style.css for hours but not the HTML, so a changed
+# stylesheet needs a new URL: ?v= is a hash of its content.
+_CSS = os.path.join(os.path.dirname(__file__), 'theme/static/css/style.css')
+with open(_CSS, 'rb') as f:
+    CSS_VERSION = hashlib.sha256(f.read()).hexdigest()[:8]

@@ -133,6 +133,15 @@ records on the apex to GitHub Pages IPs, `www` CNAME to
 `jakubjedelsky.github.io`. Enforce HTTPS after GitHub issues the
 certificate. Commits in this repo use `jakub.jedelsky@gmail.com`.
 
+Cloudflare sits in front of Pages since 2026-09-30, mainly for email
+forwarding (`ahoj@nedopsano.cz`), on default settings. It caches
+`style.css` (`cf-cache-status: HIT`, `max-age=14400`) but not the HTML, so
+a CSS change once went live as new HTML on the old stylesheet. The fix is
+`?v={{ CSS_VERSION }}` on the stylesheet link, where `CSS_VERSION` in
+`pelicanconf.py` is a hash of the file: new CSS, new URL, no purge needed.
+Anything else static that changes (favicons) would need the same trick
+or a manual purge.
+
 ## Local dev
 
 ```
