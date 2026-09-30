@@ -56,6 +56,9 @@ ordered newest first and each one is reachable at `nedopsano.cz/#slug`.
   metadata parsing breaks. Codehilite and `pygment.css` are both dropped —
   no code in poems, which also avoids the dark-mode gap the blog's
   `--code-bg`/`--code-fg` vars have.
+- **Each verse line is a `<span class="line">`**, made from nl2br's `<br>`
+  by the `verse_lines` Jinja filter in `pelicanconf.py`, so CSS can give
+  lines the screen wraps a hanging indent. The feed keeps plain `<br>`.
 - **Empty `*_SAVE_AS` rather than `rm -rf` in CI.** The blog's workflow
   deletes `author`/`category`/`tag`/`tags.html` after building; doing it in
   config is cheaper and the workflow here has no cleanup step.

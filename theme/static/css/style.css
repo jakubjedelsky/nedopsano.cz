@@ -113,6 +113,14 @@ main { padding: 0 1.25rem; }
   line-height: 1.8;
 }
 
+/* Hanging indent: a verse line the screen wraps continues indented, so it
+   reads differently from a line break the poem itself has. */
+.poem .line {
+  display: block;
+  padding-left: 1.5em;
+  text-indent: -1.5em;
+}
+
 .poem p:last-of-type { margin-bottom: 0; }
 
 .poem footer {

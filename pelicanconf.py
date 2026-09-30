@@ -1,5 +1,6 @@
 import hashlib
 import os
+import re
 
 AUTHOR = u'- jj'
 SITENAME = u'nedopsáno'
@@ -57,3 +58,15 @@ EXTRA_PATH_METADATA = {
 _CSS = os.path.join(os.path.dirname(__file__), 'theme/static/css/style.css')
 with open(_CSS, 'rb') as f:
     CSS_VERSION = hashlib.sha256(f.read()).hexdigest()[:8]
+
+
+def verse_lines(html):
+    """Wrap each verse line in <span class="line"> for the hanging indent.
+
+    ponytail: assumes nl2br's plain <p>…<br>…</p>, which is all a poem is.
+    """
+    html = html.replace('<p>', '<p><span class="line">').replace('</p>', '</span></p>')
+    return re.sub(r'<br>\s*', '</span><span class="line">', html)
+
+
+JINJA_FILTERS = {'verse_lines': verse_lines}
