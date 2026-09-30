@@ -134,9 +134,25 @@ main { padding: 0 1.25rem; }
 
 .hint-down { bottom: 1.5rem; }
 
-/* Hidden by default so browsers without scroll timelines never offer to
-   scroll up from the top; the animation below is what reveals it. */
-.hint-up { top: 1.5rem; opacity: 0; }
+.hint-up { top: 1.5rem; }
+
+/* Browsers without scroll timelines (Firefox) cannot fade the up arrow in,
+   so it is always on. This patch in --bg covers it at scroll 0 and scrolls
+   away with the page, which hides the arrow only at the very top. */
+main { position: relative; }
+
+main::before {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  translate: -50%;
+  width: 2rem;
+  height: 2rem;
+  z-index: 3;
+  background: var(--bg);
+  pointer-events: none;
+}
 
 /* The whole scroll effect. Both @supports guards are load-bearing: without
    scroll-driven timelines these run as 0s animations and `both` would leave

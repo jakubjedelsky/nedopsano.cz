@@ -85,8 +85,11 @@ Things that will bite whoever edits this next:
   timelines, `animation: ... both` runs as a 0s animation and settles on its
   final keyframe: every poem would be permanently blurred and the down
   arrow permanently invisible. Keep the animations inside the guards, and
-  keep `.hint-up { opacity: 0 }` in the unguarded base rule so browsers
-  without support never offer to scroll up from the top of the page.
+  keep the fade-in inside its guard. Without support (Firefox, as of
+  2026-09) the up arrow is simply always on, and `main::before` — a 2rem
+  patch in `--bg` at the top of the document, above the arrow — hides it
+  at scroll 0 and scrolls away with the page. It used to be
+  `.hint-up { opacity: 0 }` instead, which left Firefox with no up arrow.
 - **Fade ranges are fixed lengths, not percentages.** `15vh` rather than
   `12%`, so they behave the same with three poems as with thirty.
 - **The reduced-motion override for the arrows is nested inside the
