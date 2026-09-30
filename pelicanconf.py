@@ -9,7 +9,7 @@ SITEURL = 'http://localhost:8000'
 TIMEZONE = 'Europe/Prague'
 LOCALE = 'cs_CZ.UTF-8'
 DEFAULT_LANG = u'cs'
-DEFAULT_DATE_FORMAT = "%d. %m. %Y"
+DEFAULT_DATE_FORMAT = "%-d. %-m. %Y"
 
 THEME = 'theme'
 
