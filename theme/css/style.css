@@ -31,17 +31,38 @@ body {
   line-height: 1.65;
 }
 
-.wordmark {
+/* Strip behind the fixed corner links, so a poem taller than the screen
+   scrolls under it instead of through the text. Fades out at the bottom.
+   The ::after twin does the same for the down arrow. */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 3.5rem;
+  z-index: 1;
+  pointer-events: none;
+}
+
+body::before { top: 0; background: linear-gradient(var(--bg) 70%, transparent); }
+body::after { bottom: 0; background: linear-gradient(transparent, var(--bg) 30%); }
+
+.corner {
   position: fixed;
   top: 1.25rem;
-  left: 1.25rem;
   z-index: 1;
   color: var(--muted);
   font-size: 0.9rem;
   text-decoration: none;
 }
 
-.wordmark:hover { color: var(--accent); }
+.corner:hover { color: var(--accent); }
+
+.wordmark { left: 1.25rem; }
+.about { right: 1.25rem; }
+
+.poem p a { color: var(--accent); }
 
 main { padding: 0 1.25rem; }
 
@@ -53,7 +74,8 @@ main { padding: 0 1.25rem; }
      there is more. */
   min-height: 100vh;
   min-height: 100dvh;
-  padding: 5vh 0;
+  /* 4rem keeps a tall poem's title clear of the header strip at scroll 0. */
+  padding: max(5vh, 4rem) 0;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -103,7 +125,7 @@ main { padding: 0 1.25rem; }
   position: fixed;
   left: 50%;
   translate: -50%;
-  z-index: 1;
+  z-index: 2;  /* above body::after, which comes later in paint order */
   color: var(--muted);
   font-size: 1.1rem;
   line-height: 1;
