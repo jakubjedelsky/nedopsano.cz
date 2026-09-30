@@ -136,15 +136,16 @@ main { padding: 0 1.25rem; }
 
 .hint-up { top: 1.5rem; }
 
-/* Browsers without scroll timelines (Firefox) cannot fade the up arrow in,
-   so it is always on. This patch in --bg covers it at scroll 0 and scrolls
-   away with the page, which hides the arrow only at the very top. */
+/* Browsers without scroll timelines (Firefox) cannot fade the arrows, so
+   both are always on. These patches in --bg sit at the very top and bottom
+   of the document and scroll with it: ::before covers the up arrow at
+   scroll 0, ::after covers the down arrow at the end of the page. */
 main { position: relative; }
 
-main::before {
+main::before,
+main::after {
   content: "";
   position: absolute;
-  top: 1rem;
   left: 50%;
   translate: -50%;
   width: 2rem;
@@ -153,6 +154,9 @@ main::before {
   background: var(--bg);
   pointer-events: none;
 }
+
+main::before { top: 1rem; }
+main::after { bottom: 1rem; }
 
 /* The whole scroll effect. Both @supports guards are load-bearing: without
    scroll-driven timelines these run as 0s animations and `both` would leave

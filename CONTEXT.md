@@ -86,9 +86,10 @@ Things that will bite whoever edits this next:
   final keyframe: every poem would be permanently blurred and the down
   arrow permanently invisible. Keep the animations inside the guards, and
   keep the fade-in inside its guard. Without support (Firefox, as of
-  2026-09) the up arrow is simply always on, and `main::before` — a 2rem
-  patch in `--bg` at the top of the document, above the arrow — hides it
-  at scroll 0 and scrolls away with the page. It used to be
+  2026-09) both arrows are simply always on. `main::before` and
+  `main::after` — 2rem patches in `--bg` at the very top and bottom of the
+  document, above the arrows — hide the up arrow at scroll 0 and the down
+  arrow at the end, and scroll away with the page. It used to be
   `.hint-up { opacity: 0 }` instead, which left Firefox with no up arrow.
 - **Fade ranges are fixed lengths, not percentages.** `15vh` rather than
   `12%`, so they behave the same with three poems as with thirty.
