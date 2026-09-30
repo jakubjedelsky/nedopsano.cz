@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ SITENAME }}</title>
+  <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
   <link rel="icon" type="image/svg+xml" href="{{ SITEURL }}/favicon.svg">
   <link rel="alternate icon" href="{{ SITEURL }}/favicon.ico">
   <link rel="stylesheet" href="{{ SITEURL }}/theme/css/style.css">
@@ -13,8 +13,10 @@
   {% endif %}
 </head>
 <body>
-  <a class="wordmark" href="{{ SITEURL }}/">{{ SITENAME }}</a>
+  <a class="corner wordmark" href="{{ SITEURL }}/">{{ SITENAME }}</a>
+  <a class="corner about" href="{{ SITEURL }}/nedopsano/">co je nedopsáno</a>
 
+  {% block content %}
   <main>
     {% for article in articles %}
     <article class="poem" id="{{ article.slug }}">
@@ -29,5 +31,6 @@
   <div class="hint hint-up" aria-hidden="true">&uarr;</div>
   <div class="hint hint-down" aria-hidden="true">&darr;</div>
   {% endif %}
+  {% endblock %}
 </body>
 </html>

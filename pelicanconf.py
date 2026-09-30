@@ -12,7 +12,8 @@ THEME = 'theme'
 # Every poem lives on the single index page, reachable by anchor.
 ARTICLE_URL = '#{slug}'
 ARTICLE_SAVE_AS = ''
-DIRECT_TEMPLATES = ['index']
+DIRECT_TEMPLATES = ['index', 'nedopsano']
+NEDOPSANO_SAVE_AS = 'nedopsano/index.html'
 DEFAULT_PAGINATION = False
 PAGE_PATHS = []
 

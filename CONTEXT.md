@@ -20,7 +20,8 @@ publishconf.py              production override, SITEURL = https://nedopsano.cz
 build.sh                    html | clean | regenerate | serve  (copied from stderr.cz)
 content/*.md                one poem per file, Pelican colon metadata
 content/extra/CNAME         nedopsano.cz, copied to the output root
-theme/templates/index.html  the only template
+theme/templates/index.html  the poems page, and the base for nedopsano.html
+theme/templates/nedopsano.html  the "about" page at /nedopsano/, linked from the top-right corner
 theme/static/css/style.css  the only stylesheet
 .github/workflows/publish.yml   push to main → build → deploy to gh-pages
 ```
@@ -44,8 +45,11 @@ ordered newest first and each one is reachable at `nedopsano.cz/#slug`.
 ## Decisions and the reasons behind them
 
 - **One page, anchors only.** `ARTICLE_SAVE_AS = ''` and
-  `ARTICLE_URL = '#{slug}'`, `DIRECT_TEMPLATES = ['index']`,
+  `ARTICLE_URL = '#{slug}'`, `DIRECT_TEMPLATES = ['index', 'nedopsano']`,
   `DEFAULT_PAGINATION = False`. No page per poem, no archive, no tags.
+  The one extra page, `/nedopsano/`, is a direct template with its text
+  inline; it extends `index.html` and overrides the `title` and `content`
+  blocks, so it reuses `.poem` for layout and gets no arrows.
 - **`MARKDOWN` is overridden** to add `markdown.extensions.nl2br`, which is
   what keeps verse line breaks. Overriding `MARKDOWN` discards Pelican's
   defaults, so `markdown.extensions.meta` has to be listed again or
@@ -104,6 +108,12 @@ Two abandoned approaches, so they are not retried:
   centred in a fixed-height box leaves blank padding at both ends, so the
   visible slice of the next poem was that padding rather than its text. The
   second worked but the owner did not like the look. The arrows replaced it.
+
+- **`body::before` / `body::after` are fixed 3.5rem strips** in `--bg`
+  at the top and bottom, so a poem taller than the screen scrolls under
+  the corner links and the arrows, not through them. `::after` paints
+  after the arrows, so `.hint` needs `z-index: 2`. `.poem` has
+  `max(5vh, 4rem)` padding so the strips never hide text at rest.
 
 Knobs worth knowing: `blur(5px)` and the `35%`/`65%` plateau in `@keyframes
 focus`, `min-height: 100vh` on `.poem`, and `bottom`/`top: 1.5rem`,
