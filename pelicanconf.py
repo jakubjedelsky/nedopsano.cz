@@ -9,7 +9,6 @@ SITEURL = 'http://localhost:8000'
 TIMEZONE = 'Europe/Prague'
 LOCALE = 'cs_CZ.UTF-8'
 DEFAULT_LANG = u'cs'
-DEFAULT_DATE_FORMAT = "%-d. %-m. %Y"
 
 THEME = 'theme'
 
@@ -69,4 +68,12 @@ def verse_lines(html):
     return re.sub(r'<br>\s*', '</span><span class="line">', html)
 
 
-JINJA_FILTERS = {'verse_lines': verse_lines}
+# Month names in the nominative. strftime('%OB') gives the same, but only
+# where a cs_CZ locale is installed, and the CI runner has none.
+MONTHS = ['leden', 'únor', 'březen', 'duben', 'květen', 'červen',
+          'červenec', 'srpen', 'září', 'říjen', 'listopad', 'prosinec']
+
+JINJA_FILTERS = {
+    'verse_lines': verse_lines,
+    'month_year': lambda d: f'{MONTHS[d.month - 1]}, {d.year}',
+}

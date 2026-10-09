@@ -23,7 +23,7 @@
     <article class="poem" id="{{ article.slug }}">
       <h2>{{ article.title }} <a class="permalink" href="#{{ article.slug }}" aria-label="Odkaz na tuto báseň">#</a></h2>
       {{ article.content|verse_lines }}
-      <footer><time datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time></footer>
+      <footer><time datetime="{{ article.date.isoformat() }}">{{ article.date|month_year }}</time></footer>
     </article>
     {% endfor %}
   </main>

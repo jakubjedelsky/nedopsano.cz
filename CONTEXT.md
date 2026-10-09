@@ -62,6 +62,11 @@ ordered newest first and each one is reachable at `nedopsano.cz/#slug`.
 - **Empty `*_SAVE_AS` rather than `rm -rf` in CI.** The blog's workflow
   deletes `author`/`category`/`tag`/`tags.html` after building; doing it in
   config is cheaper and the workflow here has no cleanup step.
+- **Dates show as "říjen, 2026"**, via the `month_year` Jinja filter in
+  `pelicanconf.py` with its own list of month names. `strftime('%OB')`
+  gives the same nominative form, but only where a `cs_CZ` locale is
+  installed, and the GitHub runner has none, so it would silently fall
+  back to English in production.
 - **One template, no `base.html`.** With a single page to render, a base
   template to extend would only be indirection.
 - **Colours are the blog's, verbatim** — `--bg`, `--fg`, `--muted`,
